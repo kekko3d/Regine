@@ -1,5 +1,6 @@
 package it.polito.tdp.regine.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Regine {
@@ -16,18 +17,43 @@ public class Regine {
 	// [0]
 	//     [0, 2]
 	//            [0, 2, 1]
-	
-	private void cerca(List<Integer>parziale, int livello) {
-		if(livello==N) {
-			// caso terminale
+
+
+	ArrayList <Integer> ArrayList = new ArrayList <Integer> ();
+
+//		l.0  l.1  l.2  l.3																						
+//	0	      x
+//	1
+//	2
+//	N
+//	
+//	
+	public void cerca(Parziale parziale, int livello, boolean isThisWay, int N) {
+		System.out.println(parziale.toString());
+		if(livello >= N ) {
+
 		} else {
-			for(int colonna=0; colonna<N; colonna++) {
-				// if la possa nella casella [livello][colonna] è valida
-				// se sì, aggiungi a parziale e fai ricorsione
+			for(int colonna = 0; colonna < N; colonna++){
+				if(parziale.contains(colonna) || parziale.diagonaleAvanti(colonna, livello) || parziale.diagonaleIndietro(colonna, livello)){
+
+				} else  {
+					parziale.aggiungi(colonna);
+
+					cerca(parziale, livello + 1, isThisWay,  N);
+					
+				}
 			}
+			if(parziale.size() == N) {
+				return;
+			}
+			parziale.remove();
 		}
 	}
+
+	}
+	//fai schema su carta
+		
 	
-	
-	
-}
+
+
+
